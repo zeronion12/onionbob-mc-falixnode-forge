@@ -25,7 +25,7 @@ function bindEvents(bot) {
     function intervalFunc() {
       bot.setControlState('forward', true)
     }
-    setInterval(intervalFunc,1800000);
+    setInterval(intervalFunc,600000);
     console.log('Interval Message!');
     bot.chat('/login '+ pass);
   });
