@@ -35,10 +35,10 @@ function bindEvents(bot) {
     console.log("Error!");
   });
   
-  // Exception function: if End => Relogin
+  // Exception function: if End => Relogin (only 10 min out)
   bot.on('end', function() {
     console.log("End!");
-    setTimeout(relog, 1800000);
+    setTimeout(relog, 600000);
   });
   
   // Relogin function: do the same like Main Program
