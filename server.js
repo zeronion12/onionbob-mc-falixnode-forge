@@ -19,13 +19,13 @@ bindEvents(bot);
 // Events to bind
 function bindEvents(bot) {
   
-  // Continuous function to pretend Bot running (60 min interval to set control state)
+  // Continuous function to pretend Bot running (30 min interval to set control state)
   bot.on('chat', function(username, message) {
     if (username === bot.username) return;
     function intervalFunc() {
       bot.setControlState('forward', true)
     }
-    setInterval(intervalFunc,30000);
+    setInterval(intervalFunc,1800000);
     console.log('Interval Message!');
     bot.chat('/login '+ pass);
   });
@@ -38,7 +38,7 @@ function bindEvents(bot) {
   // Exception function: if End => Relogin
   bot.on('end', function() {
     console.log("End!");
-    setTimeout(relog, 30000);
+    setTimeout(relog, 1800000);
   });
   
   // Relogin function: do the same like Main Program
