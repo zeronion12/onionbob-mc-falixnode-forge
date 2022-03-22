@@ -1,5 +1,5 @@
 // Now make both Main chat function and events chat function the same
-// Now test with maximum 30 min idle for heroku to reduce usage
+// Worker will run no matter what so minutes interval should be short
 var mineflayer = require('mineflayer');
 var pass = "12345"; // "Authme" plugin password (No plugin No delete)
 
@@ -19,13 +19,13 @@ bindEvents(bot);
 // Events to bind
 function bindEvents(bot) {
   
-  // Continuous function to pretend Bot running (30 min interval to set control state)
+  // Continuous function to check Bot running
   bot.on('chat', function(username, message) {
     if (username === bot.username) return;
     function intervalFunc() {
       bot.setControlState('forward', true)
     }
-    setInterval(intervalFunc,600000);
+    setInterval(intervalFunc,1000);
     console.log('Interval Message!');
     bot.chat('/login '+ pass);
   });
@@ -35,10 +35,10 @@ function bindEvents(bot) {
     console.log("Error!");
   });
   
-  // Exception function: if End => Relogin (only 10 min out)
+  // Exception function: if End => Relogin
   bot.on('end', function() {
     console.log("End!");
-    setTimeout(relog, 600000);
+    setTimeout(relog, 1000);
   });
   
   // Relogin function: do the same like Main Program
